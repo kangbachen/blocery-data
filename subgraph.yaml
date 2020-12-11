@@ -1,0 +1,56 @@
+specVersion: 0.0.2
+description: Basic tracking data for Blocery
+repository: https://github.com/kangbachen/blocery-data
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: BLY
+    network: mainnet
+    source:
+      address: "0xf8aD7dFe656188A23e89da09506Adf7ad9290D5d"
+      abi: BLY
+      startBlock: 10333519
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Freeze
+        - Unfreeze
+        - Lock
+        - Unlock
+        - Paused
+        - Unpaused
+        - PauserAdded
+        - PauserRemoved
+        - OwnershipTransferred
+        - Transfer
+        - Approval
+      abis:
+        - name: BLY
+          file: ./abis/BLY.json
+      eventHandlers:
+        - event: Freeze(indexed address)
+          handler: handleFreeze
+        - event: Unfreeze(indexed address)
+          handler: handleUnfreeze
+        - event: Lock(indexed address,uint256,uint256)
+          handler: handleLock
+        - event: Unlock(indexed address,uint256)
+          handler: handleUnlock
+        - event: Paused(address)
+          handler: handlePaused
+        - event: Unpaused(address)
+          handler: handleUnpaused
+        - event: PauserAdded(indexed address)
+          handler: handlePauserAdded
+        - event: PauserRemoved(indexed address)
+          handler: handlePauserRemoved
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+      file: ./src/mapping.ts

@@ -1,0 +1,44 @@
+type Approval_ @entity {
+  id: ID!
+  count: BigInt!
+  owner: Bytes!
+  spender: Bytes!
+  value: BigInt! 
+}
+
+type OwnershipTransferred_ @entity {
+  id: ID!
+  count: BigInt!
+  previousOwner: Bytes!
+  newOwner: Bytes! 
+}
+type Transfer_ @entity {
+  id: ID!
+  count: BigInt!
+  from: Bytes!
+  to: Bytes!
+  value: BigInt! 
+}
+type Freeze_ @entity {
+  id: ID!
+  holder: Bytes!
+  count: BigInt!
+  approved: Boolean
+}
+type Lock_ @entity {
+  id: ID!
+  holder: Bytes!
+  value: BigInt!
+  releaseTime: BigInt!
+  approved: Boolean
+}
+type Paused_ @entity {
+  id: ID!
+  account: Bytes!
+  approved: Boolean
+}
+type Pauser_ @entity {
+  id: ID!
+  account: Bytes!
+  approved: Boolean
+}
